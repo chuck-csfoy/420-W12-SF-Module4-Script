@@ -6,9 +6,9 @@
 validate_variable(){
   local var="$1" #function validate 1st argument
   if [ -z "$var" ]; then
-    echo "Please valide variable"
+    echo "Please enter a valid variable value"
     return 1
-    elif [[ $var =~ [0-9]+$ && $var -ge && $var -le 1000 ]]; then
+    elif [[ "$var" =~^[0-9]+$ && "$var" -ge 0 && "$var" -le 1000 ]]; then
     return 0
     else
     echo "Invalid entry. Value must be a between number in between 0 and 1000."  
