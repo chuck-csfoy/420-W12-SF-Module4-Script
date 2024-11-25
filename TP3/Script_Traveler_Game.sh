@@ -1,7 +1,25 @@
 #!/bin/bash
+echo "--------------------------------------------------"
+echo "Welcome to the Traveler Game!"
+echo "--------------------------------------------------"
+echo "You are a trveler who has lost his wain a dense forest."
+echo ""
+echo "You come to an opening in the forest at a crossroad where you meet a freidn who is an experienced traveler."
+echo ""
+echo "You will need his help to find the right way out of the forest."
+echo ""
+echo "The experienced traveler gives you valuable information on the area as follow:"
+echo ""
+echo "1. The east road is 300 meters longer than the south road."
+echo ""
+echo "2. The south road is 200 meters shorter that the west road which is unavailable."
+echo ""
+echo "3. The north road is equal in distance to the two others."
+echo ""
+echo "Let say we understand that the distance we need to figure out is the the west road to find the other distances."
+echo "--------------------------------------------------"
 
 # prompt user input to initialize distances to variables
-# read -p is shorter cmd but similar to echo + read
 # Function validate variable to make sure the user input is valid for all variables.
 validate_variable(){
   local var="$1" #function validate 1st argument
@@ -19,6 +37,7 @@ validate_variable(){
 # Collect and validate the user input variables 
 for i in 1 2 3; do
    while true; do
+   # read -p is shorter cmd but similar to echo + read
 	read -p "Enter the distance for the south road $i: " south_road
 	read -p "Enter the distance for the east road which is 300m longer than the south road $i : " east_road
 	read -p "Enter the distance for the north road which is equal to the other roads $i : " north_road
