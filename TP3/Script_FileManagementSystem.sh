@@ -5,34 +5,39 @@
 username=""
 
 # Prompt user to ask a username input. read -p is used for this task and is similar to echo and read on two seperate lines.
-read -p "Enter the username to be created: " username
-
-if [ -z "$username" ]; then
-  echo "Error : No username entered. Username cannot be empty."
-fi
+while true; do
+  read -p "Enter the username to be created: " username
+  if [ -z "$username" ]; then
+    echo "Error : No username entered. Username cannot be empty."
+  # username verification if it does not exist already.
+  elif id "$username" &>/dev/null; then
+    echo "Error : Username '$username' already exist."
+  else
+    # if the username does not exist, create it.
+    break
+  fi
+done
 
 # username creation user adduser.
-  echo "username id creation '$username'..."
-  sudo useradd "$username"
+echo "username id creation '$username'..."
+sudo useradd "$username"
 
-# username verification if it does not exist already.
-if ! id "$username" &>/dev/null; then
-  echo "Error : Username '$username' already exist."
-  else
-    echo "Username '$username' was created with success."
-fi
+echo "Username '$username' was created with success."
 
 # This portion of the script is used to ask user to choose a name for a new directory name.
 # directory name variable declaration.
 directory_name=""
 
 # Prompt user tp choose a directory name
-read -p "Enter the directory name to be created: " directory_name
-
-# User input verification to check if entry is empty.
-if [ -z "$directory_name" ]; then
-  echo "Error : No directory name entered. Directory name cannot be empty."
-fi
+while true; do
+  read -p "Enter the directory name to be created: " directory_name
+  # User input verification to check if entry is empty.
+  if [ -z "$directory_name" ]; then
+    echo "Error : No directory name entered. Directory name cannot be empty."
+  else
+    break
+  fi
+done
 
 # Directory creation with option -p to check if the directory already exist. If so it won't be created.
 # Verification with option -p is shorter but euqivalent to use if [ $? -eq 0 ]; then... -eq = (equal).
@@ -48,12 +53,15 @@ chmod 700 "$directory_name"
 file_name=""
 
 # Prompt user to choose a file name.
-read -p "Enter a file name to be created: " file_name
-
-# User input verifiaction if entry is not empty.
-if [ -z "file_name" ]; then
-  echo "Error : No file name. File name cannot be empty."
-fi
+while true; do
+  read -p "Enter a file name to be created: " file_name
+  # User input verifiaction if entry is not empty.
+  if [ -z "file_name" ]; then
+    echo "Error : No file name. File name cannot be empty."
+  else
+    break
+  fi
+done
 
 # File creation with option -c to check if the file already exist. If so it won't be created.
 touch -c "$file_name"
