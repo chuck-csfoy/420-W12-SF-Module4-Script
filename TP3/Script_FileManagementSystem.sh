@@ -48,14 +48,14 @@ done
 
 # Directory creation with option -p to check if the directory already exist. If so it won't be created.
 # Verification with option -p is shorter but euqivalent to use if [ $? -eq 0 ]; then... -eq = (equal).
-mkdir -p home/user/$username/"$directory_name"
+mkdir -p "/home/$username/$directory_name"
 # Prompt user that the operation was successful
 echo "Directory '$directory_name' was created with success"
 
 # Sticky bit is used on the user directory to ensure only the owner or Root can delete files.
-chmod +t home/user/$username/"$directory_name"
+chmod +t "/home/$username/$directory_name"
 # User permissions changed using chmod as per requirements so that only the directory owner has access.
-chmod 700 home/user/$username/"$directory_name"
+chmod 700 "/home/$username/$directory_name"
 
 # Script to as user to select a new filename and to generate the new file if it does not exist already.
 # varibale declaration for filename.
@@ -73,7 +73,7 @@ while true; do
 done
 
 # File creation with option -c to check if the file already exist. If so it won't be created.
-touch -c home/user/$username/$directory_name/"$file_name"
+touch -c "/home/$username/$directory_name/$file_name"
 # Similar to with mkdir p above. Verification with option c.
 echo "File '$file_name' was created with success."
 
