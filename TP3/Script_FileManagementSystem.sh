@@ -49,8 +49,14 @@ done
 # Directory creation with option -p to check if the directory already exist. If so it won't be created.
 # Verification with option -p is shorter but euqivalent to use if [ $? -eq 0 ]; then... -eq = (equal).
 mkdir -p "/home/$username/$directory_name"
-# Prompt user that the operation was successful
-echo "Directory '$directory_name' was created with success"
+
+if [ -d "/home/$username/$directory_name" ]; then
+  # Prompt user that the operation was successful
+  echo "Directory '$directory_name' was created with success"
+else
+  echo "Error : Failed to create directory '$directory_name'."
+  exit 1
+fi
 
 # Sticky bit is used on the user directory to ensure only the owner or Root can delete files.
 chmod +t "/home/$username/$directory_name"
@@ -72,22 +78,21 @@ while true; do
   fi
 done
 
-# File creation with option -c to check if the file already exist. If so it won't be created.
-touch -c "/home/$username/$directory_name/$file_name"
-# Similar to with mkdir p above. Verification with option c.
+# File creation with touch if the file does not already exist.
+touch "/home/$username/$directory_name/$file_name"
 echo "File '$file_name' was created with success."
 
 # Prompt user with welcome message.
-echo "Welcome $username on your new workstation and in the BASH terminal $(hostname)!" > "$file_name"
-echo "We are please to see that your machine $(hostname) is also doing well" >> "$file_name"
+echo "Welcome $username on your new workstation and in the BASH terminal $(hostname)!" > "/home/$username/$directory_name/$file_name"
+echo "We are please to see that your machine $(hostname) is also doing well" >> "/home/$username/$directory_name/$file_name"
 # Prompt to inform user on his permissions. ls : list short, -ld flag list the directory itself and not it's content(-l: detailled listing & -d shows only metadata of the directory)
 # Pipe operator | is used to take the output of ls -ld to and passes it as input to the next command on the right side.
 # awk cmd is used to extract and print the first column form the ls -ld output which is the persmissions of the directory.
 # {prnt $1} is use to tell awk to print the first (1st) field wich is (drwxr-xr-x).
 # Redirectin operator is used to add (append) the output of the cmd to a file.
-echo "Your work directory is '$directory_name' has the following permissions: $(ls -ld "$directory_name" | awk '{print $1}')." >> "$file_name"
+echo "Your work directory is '$directory_name' has the following permissions: $(ls -ld "/home/$username/$directory_name" | awk '{print $1}')." >> "/home/$username/$directory_name/$file_name"
 # hostname -I is used to display ip address with the same commands to add info to file.
-echo "Your IP address is : $(hostname -I | awk '{print $1}')." >> "$file_name"
+echo "Your IP address is : $(hostname -I | awk '{print $1}')." >> "/home/$username/$directory_name/$file_name"
 
 # Display file content on stdout (bash terminal)
-cat "$file_name"
+cat "/home/$username/$directory_name/$file_name"
