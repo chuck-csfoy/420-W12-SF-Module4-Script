@@ -1,10 +1,10 @@
 #!/bin/bash
 echo "--------------------------------------------------"
-echo "Welcome to the Traveler Game!"
+echo "          Welcome to the Traveler Game!           "
 echo "--------------------------------------------------"
-echo "You are a trveler who has lost his wain a dense forest."
+echo "You are a traveler who has lost his way in a dense forest."
 echo ""
-echo "You come to an opening in the forest at a crossroad where you meet a freidn who is an experienced traveler."
+echo "You come to an opening in the forest at a crossroad where you meet a friend who is an experienced traveler."
 echo ""
 echo "You will need his help to find the right way out of the forest."
 echo ""
@@ -16,7 +16,7 @@ echo "2. The south road is 200 meters shorter that the west road which is unavai
 echo ""
 echo "3. The north road is equal in distance to the two others."
 echo ""
-echo "Let say we understand that the distance we need to figure out is the the west road to find the other distances."
+echo "We need to find out the west road distance to find the other distances."
 echo "--------------------------------------------------"
 
 # prompt user input to initialize distances to variables
